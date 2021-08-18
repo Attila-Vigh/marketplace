@@ -4,7 +4,7 @@ import {
     validateUploadImage,
     checkProductSchema,
     validateProductSchema,
-} from "./validations.js";
+    } from "./validations.js";
 import multer from "multer";
 
 const upload = multer();

@@ -1,8 +1,6 @@
 import { checkSchema, validationResult } from "express-validator";
 import createError from "http-errors";
 
-const contactTypes = ["phone", "email", "skype", "twitter", "discord"];
-
 const productSchema = {
 	name: {
 		in: ["body"],
