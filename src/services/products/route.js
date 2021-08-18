@@ -1,12 +1,22 @@
 import { Router } from "express";
 import productsHandlers from "./handlers.js";
+import {
+    validateUploadImage,
+    checkProductSchema,
+    validateProductSchema,
+} from "./validations.js";
 import multer from "multer";
 
 const upload = multer();
 
 const route = Router();
 
-route.post  ( "/"    , productsHandlers.create );
+route.post  ( 
+    "/",
+    checkProductSchema,
+    validateProductSchema, 
+    productsHandlers.create 
+);
 
 route.get   ( "/"    , productsHandlers.list   );
 
@@ -19,7 +29,9 @@ route.put   ( "/:id" , productsHandlers.update );
 route.put   ( 
     "/:id/image" ,
     upload.single( "image" ), 
-    productsHandlers.image );
+    validateUploadImage,
+    productsHandlers.image 
+);
 
 route.delete( "/:id" , productsHandlers.delete );
 
