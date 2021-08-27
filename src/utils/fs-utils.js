@@ -9,8 +9,6 @@ export const publicPath = join(process.cwd(), '/public');
 
 export const getPath = (file) => join(dirname(fileURLToPath(import.meta.url)), file);
 
-// const dataJSONFilePath = getPath('../data/dataList.json');
-
 export const readData = async (dataJSONFilePath) => {
 	try
 	{
