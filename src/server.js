@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import listEndpoints from 'express-list-endpoints';
+// import db from "./db/index.js";
+import { syncSequelize } from "./db/db_connection.js";
 import services from './services/index.js';
 import { notFoundErrorHandler, badRequestErrorHandler, serverErrorHandler } from './middlewares/errorHandlers.js'
 import { publicPath } from "./utils/fs-utils.js";
@@ -38,5 +40,14 @@ app.use(notFoundErrorHandler);
 app.use(badRequestErrorHandler);
 app.use(serverErrorHandler)
 
-app.listen(PORT, () => console.log(`Server running at http://localhost:${ PORT }`));
-app.on('error', (err) => console.log(`Server crushed: ${ err }`));
+// db.sequelize
+//     .sync()
+//     .then(() => {
+        app.listen(PORT, async () =>{ 
+            console.log(`Server running at http://localhost:${ PORT }`)
+            await syncSequelize()
+        });
+
+        app.on('error', (err) => console.log(`Server crushed: ${ err }`));
+    // })
+    // .catch( console.error);
