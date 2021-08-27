@@ -22,14 +22,20 @@ const productSchema = {
 	},
 	price: {
 		in: ["body"],
+		isNumber: {
+			errorMessage: "Price  must be a number!",
+		},
+	},
+	image: {
+		in: ["body"],
 		isString: {
-			errorMessage: "Price  must be a string",
+			errorMessage: "Price  must be a string!",
 		},
 	},
 	category: {
 		in: ["body"],
 		isString: {
-			errorMessage: "Category  must be a string",
+			errorMessage: "Category  must be a string!",
 		},
 	},
 };
@@ -37,12 +43,14 @@ const productSchema = {
 export const validateUploadImage = (req, res, next) => {
 	if (!req.file) {
 		next(createError(400, "Image must be sent"));
-	} else {
+	} 
+	else {
 		const allowedExtensions = ["png", "jpg", "jpeg"];
 		const [fileName, ext] = req.file.originalname.split(".");
 		if (!allowedExtensions.includes(ext)) {
 			next(createError(400, "Image must be image"));
-		} else {
+		} 
+		else {
 			next();
 		}
 	}
